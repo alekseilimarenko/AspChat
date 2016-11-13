@@ -1,0 +1,58 @@
+﻿@using AspChat.Models
+@model Message
+@{
+    ViewBag.Title = "Chat Room";
+    var mess = ViewBag.Messages as List<Message>;
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Chat", "Home", FormMethod.Post))
+{
+    if (ViewBag.Sender != null)
+    {
+        <input type="hidden" name="Sender" value=@ViewBag.Sender />
+
+        <div class="form-group">
+            <label name="Sender">@ViewBag.Sender</label>
+                <div>
+                    @Html.TextArea("chatMessage", null, 3, 80, htmlAttributes: new {@class = "form-control"})
+                </div>
+        </div>
+
+        <input type="submit" class="btn btn-info" value="Send"/>
+    }
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Sender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChatMessage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+        </tr>
+        @if (mess != null)
+        {
+            foreach (var item in mess)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelIttem => item.Sender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ChatMessage)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                </tr>
+            }
+        }
+        
+    </table>
+}

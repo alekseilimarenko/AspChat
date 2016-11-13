@@ -1,0 +1,37 @@
+﻿@model AspChat.Models.User
+@{
+    ViewBag.Title = "Login Page";
+}
+
+<div>
+    <h1>@ViewBag.Title</h1>
+</div>
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+        <input type="hidden" value= @Guid.NewGuid() name="Id"/>
+        
+        <div class="row">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UserLogin)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UserLogin, new { htmlAttributes = new { @class = "form-control", @id = "userLogin" } })
+                @Html.ValidationMessageFor(model => model.UserLogin, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UserPass)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UserPass, new { htmlAttributes = new { @class = "form-control", @id = "userPass" } })
+                @Html.ValidationMessageFor(model => model.UserPass, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    <div>
+        <input type="submit" class="btn btn-info" value="Enter">
+    </div>
+}
